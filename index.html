@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <title>Portofoliu web</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Portofoliu cu proiecte web realizate: ClassicArt, Perfect Match, Technoars, Caricatura Ta, RevauTech." />
+
+  <!-- Font (opțional) -->
+  <link rel="preconnect" href="https://fonts.bunny.net" />
+  <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700" rel="stylesheet" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #020617;
+      --bg-elevated: #020617;
+      --bg-soft: #020617;
+      --border-subtle: #1f2937;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.08);
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --text-soft: #6b7280;
+      --card-radius: 18px;
+      --shadow-soft: 0 24px 60px rgba(15, 23, 42, 0.9);
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #0b1120 0, #020617 55%, #020617 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 16px 56px;
+    }
+
+    header.hero {
+      padding: 16px 4px 26px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+      margin-bottom: 32px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      margin-bottom: 6px;
+    }
+
+    .hero-eyebrow span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
+    }
+
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.9rem, 4vw, 2.3rem);
+      letter-spacing: 0.02em;
+    }
+
+    .hero-subtitle {
+      max-width: 640px;
+      margin: 0;
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .hero-meta {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-meta span::before {
+      content: "";
+      width: 7px;
+      height: 1px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.7);
+    }
+
+    /* Projects list */
+
+    .projects {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .section-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
+
+    .project-card {
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), rgba(15, 23, 42, 0.9));
+      border-radius: var(--card-radius);
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      box-shadow: var(--shadow-soft);
+      padding: 14px 14px 14px;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+      gap: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: inherit;
+      box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.7);
+      opacity: 0;
+      transition: opacity 0.18s ease;
+    }
+
+    .project-card:hover::after {
+      opacity: 1;
+    }
+
+    .project-main {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 1;
+    }
+
+    .project-meta-line {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .project-index {
+      font-weight: 600;
+      font-size: 0.82rem;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    .project-type {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .project-title {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    .project-title a {
+      text-decoration: none;
+      color: inherit;
+      border-bottom: 1px solid transparent;
+    }
+
+    .project-title a:hover {
+      border-bottom-color: rgba(148, 163, 184, 0.6);
+    }
+
+    .project-desc {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 6px 0 0;
+      padding: 0;
+      list-style: none;
+      font-size: 0.8rem;
+    }
+
+    .project-tags li {
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      color: var(--text-soft);
+      backdrop-filter: blur(4px);
+    }
+
+    .project-footer {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .project-link-main {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 13px;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.7);
+      background: var(--accent-soft);
+      color: var(--text-main);
+      font-size: 0.86rem;
+      text-decoration: none;
+    }
+
+    .project-link-main span.icon {
+      font-size: 0.98rem;
+      transform: translateY(-1px);
+    }
+
+    .project-domain {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      word-break: break-all;
+    }
+
+    /* Thumbnail */
+
+    .project-thumb {
+      position: relative;
+      border-radius: calc(var(--card-radius) - 2px);
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: radial-gradient(circle at top, #020617 0, #020617 50%, #020617 100%);
+      min-height: 160px;
+      isolation: isolate;
+    }
+
+    .project-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.02);
+      opacity: 0.9;
+      transition: transform 0.35s ease, opacity 0.35s ease;
+    }
+
+    .project-card:hover .project-thumb img {
+      transform: scale(1.06);
+      opacity: 1;
+    }
+
+    .thumb-label {
+      position: absolute;
+      inset: auto 10px 10px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: var(--text-soft);
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.94));
+      border: 1px solid rgba(30, 64, 175, 0.6);
+      backdrop-filter: blur(8px);
+    }
+
+    .thumb-pill {
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.65);
+      font-size: 0.7rem;
+    }
+
+    footer {
+      margin-top: 36px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(30, 64, 175, 0.6);
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    footer span.highlight {
+      color: var(--accent);
+    }
+
+    @media (max-width: 780px) {
+      .page {
+        padding: 18px 12px 40px;
+      }
+
+      header.hero {
+        padding-inline: 2px;
+      }
+
+      .project-card {
+        grid-template-columns: 1fr;
+        padding: 12px 12px 13px;
+      }
+
+      .project-thumb {
+        order: -1;
+        min-height: 140px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div class="hero-eyebrow">
+        <span class="dot"></span>
+        <span>Portofoliu web</span>
+      </div>
+      <h1>Proiecte selectate</h1>
+      <p class="hero-subtitle">
+        O selecție de site-uri realizate, axate pe prezentare clară, structură curată și experiență plăcută pentru utilizator.
+        Link-urile duc către versiunea live a fiecărui proiect.
+      </p>
+      <div class="hero-meta">
+        <span>Focus pe front-end &amp; UI</span>
+        <span>Layout responsive</span>
+        <span>Ordine descrescătoare după recență</span>
+      </div>
+    </header>
+
+    <main>
+      <p class="section-label">Proiecte</p>
+      <section class="projects">
+
+        <!-- 01 — ClassicArt -->
+        <article class="project-card">
+          <div class="project-main">
+            <div class="project-meta-line">
+              <span class="project-index">01</span>
+              <span class="project-type">Site de prezentare</span>
+            </div>
+            <h2 class="project-title">
+              <a href="https://classicart.ro" target="_blank" rel="noopener noreferrer">
+                ClassicArt.ro
+              </a>
+            </h2>
+            <p class="project-desc">
+              Site de prezentare pentru un brand axat pe artă / produse vizuale. Accent pe imagini mari, secțiuni aerisite
+              și structură ușor de urmărit pentru vizitatori.
+            </p>
+            <ul class="project-tags">
+              <li>Design curat</li>
+              <li>Structură multi-secțiune</li>
+              <li>Responsive</li>
+            </ul>
+            <div class="project-footer">
+              <a class="project-link-main" href="https://classicart.ro" target="_blank" rel="noopener noreferrer">
+                Vezi site-ul <span class="icon">↗</span>
+              </a>
+              <span class="project-domain">https://classicart.ro</span>
+            </div>
+          </div>
+          <div class="project-thumb">
+            <!-- Pune aici thumbnail-ul tău: înlocuiește classicart-thumb.jpg cu fișierul real -->
+            <img src="classicart-thumb.jpg" alt="Previzualizare ClassicArt.ro" />
+            <div class="thumb-label">
+              <span>Previzualizare pagină principală</span>
+              <span class="thumb-pill">ClassicArt</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 02 — Perfect Match -->
+        <article class="project-card">
+          <div class="project-main">
+            <div class="project-meta-line">
+              <span class="project-index">02</span>
+              <span class="project-type">Concept platformă</span>
+            </div>
+            <h2 class="project-title">
+              <a href="https://perfect-match.ro" target="_blank" rel="noopener noreferrer">
+                Perfect-Match.ro
+              </a>
+            </h2>
+            <p class="project-desc">
+              Pagină pentru o platformă de tip „match” / conectare între oameni sau servicii. Conținut structurat clar,
+              secțiuni explicative și call-to-action-uri vizibile.
+            </p>
+            <ul class="project-tags">
+              <li>Landing page</li>
+              <li>Secțiuni hero + beneficii</li>
+              <li>Formulare / CTA</li>
+            </ul>
+            <div class="project-footer">
+              <a class="project-link-main" href="https://perfect-match.ro" target="_blank" rel="noopener noreferrer">
+                Vezi site-ul <span class="icon">↗</span>
+              </a>
+              <span class="project-domain">https://perfect-match.ro</span>
+            </div>
+          </div>
+          <div class="project-thumb">
+            <img src="perfect-match-thumb.jpg" alt="Previzualizare Perfect-Match.ro" />
+            <div class="thumb-label">
+              <span>Structură de tip landing</span>
+              <span class="thumb-pill">Perfect Match</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 03 — Technoars -->
+        <article class="project-card">
+          <div class="project-main">
+            <div class="project-meta-line">
+              <span class="project-index">03</span>
+              <span class="project-type">Servicii &amp; tehnologie</span>
+            </div>
+            <h2 class="project-title">
+              <a href="https://technoars.ro" target="_blank" rel="noopener noreferrer">
+                Technoars.ro
+              </a>
+            </h2>
+            <p class="project-desc">
+              Site orientat către servicii tech. Layout structurat pe secțiuni (servicii, avantaje, contact) cu un look mai
+              tehnic și elemente vizuale moderne.
+            </p>
+            <ul class="project-tags">
+              <li>Servicii B2B</li>
+              <li>Structură clară</li>
+              <li>Contact rapid</li>
+            </ul>
+            <div class="project-footer">
+              <a class="project-link-main" href="https://technoars.ro" target="_blank" rel="noopener noreferrer">
+                Vezi site-ul <span class="icon">↗</span>
+              </a>
+              <span class="project-domain">https://technoars.ro</span>
+            </div>
+          </div>
+          <div class="project-thumb">
+            <img src="technoars-thumb.jpg" alt="Previzualizare Technoars.ro" />
+            <div class="thumb-label">
+              <span>Pagină servicii &amp; prezentare</span>
+              <span class="thumb-pill">Technoars</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 04 — Caricatura-Ta -->
+        <article class="project-card">
+          <div class="project-main">
+            <div class="project-meta-line">
+              <span class="project-index">04</span>
+              <span class="project-type">Serviciu creativ</span>
+            </div>
+            <h2 class="project-title">
+              <a href="https://caricatura-ta.com" target="_blank" rel="noopener noreferrer">
+                Caricatura-Ta.com
+              </a>
+            </h2>
+            <p class="project-desc">
+              Site dedicat unui serviciu creativ (caricaturi). Accent pe imagini, exemple de lucrări și o prezentare clară
+              a procesului de comandă.
+            </p>
+            <ul class="project-tags">
+              <li>Vizual &amp; fun</li>
+              <li>Galerie lucrări</li>
+              <li>Call-to-action pentru comenzi</li>
+            </ul>
+            <div class="project-footer">
+              <a class="project-link-main" href="https://caricatura-ta.com" target="_blank" rel="noopener noreferrer">
+                Vezi site-ul <span class="icon">↗</span>
+              </a>
+              <span class="project-domain">https://caricatura-ta.com</span>
+            </div>
+          </div>
+          <div class="project-thumb">
+            <img src="caricatura-thumb.jpg" alt="Previzualizare Caricatura-Ta.com" />
+            <div class="thumb-label">
+              <span>Exemple de ilustrații</span>
+              <span class="thumb-pill">Caricatura Ta</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 05 — RevauTech -->
+        <article class="project-card">
+          <div class="project-main">
+            <div class="project-meta-line">
+              <span class="project-index">05</span>
+              <span class="project-type">Companie / proiect tech</span>
+            </div>
+            <h2 class="project-title">
+              <a href="https://revautech.com" target="_blank" rel="noopener noreferrer">
+                RevauTech.com
+              </a>
+            </h2>
+            <p class="project-desc">
+              Site de tip corporate / tehnologie, cu secțiuni pentru prezentarea companiei, servicii și modalități de
+              contact, realizat cu focus pe claritate și structură.
+            </p>
+            <ul class="project-tags">
+              <li>Corporate</li>
+              <li>Prezentare companie</li>
+              <li>Structură profesională</li>
+            </ul>
+            <div class="project-footer">
+              <a class="project-link-main" href="https://revautech.com" target="_blank" rel="noopener noreferrer">
+                Vezi site-ul <span class="icon">↗</span>
+              </a>
+              <span class="project-domain">https://revautech.com</span>
+            </div>
+          </div>
+          <div class="project-thumb">
+            <img src="revautech-thumb.jpg" alt="Previzualizare RevauTech.com" />
+            <div class="thumb-label">
+              <span>Prezentare business</span>
+              <span class="thumb-pill">RevauTech</span>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      <span>&copy; <span id="year"></span> Portofoliu web</span>
+      <span>Ordine: <span class="highlight">de la cel mai nou la cel mai vechi</span> (conform listei furnizate).</span>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
